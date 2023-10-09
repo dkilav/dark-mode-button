@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <body class="antialiased" x-data="{'darkMode': false}" x-init="
+       darkMode = JSON.parse(localStorage.getItem('darkMode'));
+       $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))">
+      <div :class="{'dark': darkMode === true}">
+        <div class="min-h-screen text-gray-800 bg-white dark:bg-gray-800 dark:text-gray-100">
+          <div class="flex flex-col space-y-1 m-auto max-w-[1440px] pt-8">
+            <div class="fixed  translate-y-16  flex justify-end items-center space-x-2">
+              <span class="text-sm text-gray-800 dark:text-gray-500"></span>
+              <label for="toggle"
+                class="w-9 h-5 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-600">
+                <div
+                  class="toggle-dot bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3">
+                </div>
+              </label>
+              <span class="text-sm text-gray-400 dark:text-white"></span>
+              <input id="toggle" type="checkbox" class="hidden" :value="darkMode" @change="darkMode = !darkMode" />
+            </div>
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div x-data="{navOpen: false, scrolledFromTop: false}"
+      x-init="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+      @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false" :class="{
+                   'overflow-hidden': navOpen,
+                   'overflow-scroll': !navOpen
+                   }">
+      <header class="-top-4
+                   fixed
+                   max-w-[1440px]
+                   w-full
+                   bg-sky-950
+                   flex
+                   justify-between
+                   items-center
+                   px-8
+                   md:px-12
+                   transition-all
+                   duration-200
+                   h-24
+                " :class="{'h-24': !scrolledFromTop, 'h-14': scrolledFromTop}">
+        <a href="#">
+          <img src="img/odigo-Logo.svg" alt="Logo" class="h-8 lg:ml-36 transform origin-left transition duration-200"
+            :class="{'scale-100': !scrolledFromTop, 'scale-75': scrolledFromTop}" />
+        </a>
+        <nav class="lg:mr-[140px]">
+          <button class="md:hidden" @click="navOpen = !navOpen">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <ul class="
+                         fixed
+                         left-0
+                         right-0
+                         min-h-screen
+                         px-4
+                         pt-8
+                         space-y-4
+                         bg-sky-950
+                         text-white
+                         transform
+                         transition
+                         duration-300
+                         translate-x-full
+                         md:relative md:flex md:space-x-10 md:min-h-0 md:px-0 md:py-0 md:space-y-0 md:translate-x-0
+                      " :class="{'translate-x-full': !navOpen}" :class="{'translate-x-0': navOpen}">
+            <li class="">
+              <a href="#" @click="navOpen = false">Home</a>
+            </li>
+            <li class="">
+              <a href="#features" @click="navOpen = false">Features</a>
+            </li>
+            <li>
+              <a href="#about" @click="navOpen = false">About</a>
+            </li>
+            <li>
+              <a href="#contact" @click="navOpen = false">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    
+    <div class="w-full h-12 mx-auto text-center p-2 bg-orange-500 bottom-0 fixed">Это будет футер</div>  
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
